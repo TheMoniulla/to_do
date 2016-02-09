@@ -1,0 +1,19 @@
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Completed
+    %th Actions
+  - tasks.each do |task|
+    %tr
+      %td= task
+      %td
+        = task.completed_for_display
+        - if task.completed
+          = link_to 'Make this task uncomplete', uncomplete_task_path(task), method: :put
+        - else
+          = link_to 'Complete this task', complete_task_path(task), method: :put
+      %td
+        =link_to 'Show', task_path(task)
+        =link_to 'Edit', edit_task_path(task)
+        =link_to 'Delete', task_path(task), method: :delete, data: {confirm: 'Are you sure?'}
+
